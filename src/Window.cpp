@@ -135,6 +135,15 @@ void sim::Window::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue) {
 
 }
 
+void sim::Window::fillRect(int x, int y, int width, int height, Uint8 red, Uint8 green, Uint8 blue)
+{
+	for (int dx = 0; dx < width; dx++) {
+		for (int dy = 0; dy < height; dy++) {
+			Window::setPixel(x + dx, y + dy, red, green, blue);
+		}
+	}
+}
+
 //Destructor Function
 //free all memory on heap using SDL destroy funcitons
 sim::Window::~Window() {

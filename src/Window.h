@@ -23,6 +23,7 @@ namespace sim {
 		void clear();
 		void update();
 		void setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue);
+		void fillRect(int x, int y, int width, int height, Uint8 red, Uint8 green, Uint8 blue);
 
 	private:
 		SDL_Window* m_Window;

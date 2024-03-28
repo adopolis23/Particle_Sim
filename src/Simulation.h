@@ -24,6 +24,9 @@ private:
 	bool isRunning;
 
 	unsigned int blockSize;
+	unsigned int simWidth;
+	unsigned int simHeight;
+
 	unsigned int targetFPS;
 
 	Uint8* m_SimStates;
