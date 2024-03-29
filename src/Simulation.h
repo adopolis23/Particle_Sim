@@ -15,6 +15,8 @@ public:
 	void Render();
 
 private:
+	void mouseClick(SDL_MouseButtonEvent& b);
+	void placeSand(const unsigned int& x, const unsigned int& y);
 	
 	sim::Window* m_Window;
 

@@ -51,6 +51,13 @@ void Simulation::Start()
 }
 
 
+void Simulation::mouseClick(SDL_MouseButtonEvent& b) {
+	if (b.button == SDL_BUTTON_LEFT) {
+		std::cout << b.x << " " << b.y << "\n";
+		placeSand(b.x, b.y);
+	}
+}
+
 
 void Simulation::HandleInput()
 {
@@ -62,8 +69,7 @@ void Simulation::HandleInput()
 		case SDL_QUIT:
 			isRunning = false;
 		case SDL_MOUSEBUTTONDOWN:
-			//do something
-			isRunning = false;
+			mouseClick(e.button);
 
 		default:
 			break;
@@ -85,10 +91,10 @@ void Simulation::Render()
 	
 	for (int x_block = 0; x_block < simWidth; x_block++) {
 		for (int y_block = 0; y_block < simHeight; y_block++) {
-			if (m_SimStates[x_block + y_block * simHeight] == 0) {
+			if (m_SimStates[x_block + y_block * simWidth] == 0) {
 				continue;
 			}
-			else if (m_SimStates[x_block + y_block * simHeight] == 1) {
+			else if (m_SimStates[x_block + y_block * simWidth] == 1) {
 				m_Window->fillRect(x_block*blockSize, y_block*blockSize, blockSize, blockSize, 0xFF, 0xFF, 0xFF);
 			}
 		}
@@ -98,6 +104,14 @@ void Simulation::Render()
 
 	//copies the buffer contents to the window renderer - pushes changes maid by render functions to the screen
 	m_Window->update();
+}
+
+void Simulation::placeSand(const unsigned int& x, const unsigned int& y)
+{
+	int block_x = (int)(x / blockSize);
+	int block_y = (int)(y / blockSize);
+
+	m_SimStates[block_x + block_y * simWidth] = 1;
 }
 
 

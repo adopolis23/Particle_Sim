@@ -17,7 +17,6 @@ namespace sim {
 
 
 		bool init();
-
 		int handleEvents();
 
 		void clear();
