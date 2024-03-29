@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>M:\dev\Particle_Sim\lib\SDL2\include;M:\dev\Particle_Sim\src;$(IncludePath)</IncludePath>
-    <LibraryPath>M:\dev\Particle_Sim\lib\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\lib\SDL2\lib\x64;M:\dev\Particle_Sim\lib\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)/src;$(SolutionDir)/libs/SDL2/include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\dev\Particle_Sim\src;C:\dev\Particle_Sim\lib\SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\dev\Particle_Sim\lib\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\lib\SDL2\lib\x64;C:\dev\Particle_Sim\lib\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)/src;$(SolutionDir)/libs/SDL2/include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,11 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="Particle_Sim.cpp" />
     <ClCompile Include="src\Simulation.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Simulation.h" />
     <ClInclude Include="src\Window.h" />
   </ItemGroup>

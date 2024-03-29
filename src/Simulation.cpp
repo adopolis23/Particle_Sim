@@ -81,6 +81,14 @@ void Simulation::HandleInput()
 
 void Simulation::Update()
 {
+	for (int curr_row = simHeight-1; curr_row > 0; curr_row--) {
+		for (int x = 0; x < simWidth; x++) {
+			if (m_SimStates[x + curr_row * simWidth] == 1 && m_SimStates[x + (curr_row + 1) * simWidth] == 0 && curr_row < simHeight-1) {
+				m_SimStates[x + curr_row * simWidth] = 0;
+				m_SimStates[x + (curr_row+1) * simWidth] = 1;
+			}
+		}
+	}
 }
 
 
@@ -89,7 +97,7 @@ void Simulation::Render()
 	//clears the screen - sets the main buffer to all zero
 	m_Window->clear();
 	
-	for (int x_block = 0; x_block < simWidth; x_block++) {
+	/*for (int x_block = 0; x_block < simWidth; x_block++) {
 		for (int y_block = 0; y_block < simHeight; y_block++) {
 			if (m_SimStates[x_block + y_block * simWidth] == 0) {
 				continue;
@@ -98,7 +106,7 @@ void Simulation::Render()
 				m_Window->fillRect(x_block*blockSize, y_block*blockSize, blockSize, blockSize, 0xFF, 0xFF, 0xFF);
 			}
 		}
-	}
+	}*/
 	
 
 
