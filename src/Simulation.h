@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "ParticleSystem.h"
 #include <vector>
+#include <iomanip>
 
 
 class Simulation
@@ -19,8 +20,8 @@ public:
 
 private:
 	void mouseClick(SDL_MouseButtonEvent& b);
-	void placeSand(const unsigned int& x, const unsigned int& y);
-	
+	void drawDensityHeatMap(int block_size);
+
 	sim::Window* m_Window;
 
 	Uint16 m_Width;
@@ -28,14 +29,9 @@ private:
 
 	bool isRunning;
 
-	unsigned int blockSize;
-	unsigned int simWidth;
-	unsigned int simHeight;
-
 	unsigned int targetFPS;
 
-	Uint8* m_SimStates;
 
-	ParticleSystem m_ParticleSystem;
+	ParticleSystem* m_ParticleSystem;
 };
 
