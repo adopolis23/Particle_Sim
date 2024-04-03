@@ -1,8 +1,8 @@
 #pragma once
 #include "Window.h"
-#include "Particle.h"
-
+#include "ParticleSystem.h"
 #include <vector>
+
 
 class Simulation
 {
@@ -35,7 +35,7 @@ private:
 	unsigned int targetFPS;
 
 	Uint8* m_SimStates;
-	std::vector<simulation::Particle> m_Particles;
 
+	ParticleSystem m_ParticleSystem;
 };
 

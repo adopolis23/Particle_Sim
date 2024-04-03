@@ -19,6 +19,8 @@ Simulation::Simulation()
 	//caluculate the simulation dimentions
 	simWidth = m_Width / blockSize;
 	simHeight = m_Height / blockSize;
+
+
 }
 
 
@@ -81,14 +83,7 @@ void Simulation::HandleInput()
 
 void Simulation::Update()
 {
-	for (int curr_row = simHeight-1; curr_row > 0; curr_row--) {
-		for (int x = 0; x < simWidth; x++) {
-			if (m_SimStates[x + curr_row * simWidth] == 1 && m_SimStates[x + (curr_row + 1) * simWidth] == 0 && curr_row < simHeight-1) {
-				m_SimStates[x + curr_row * simWidth] = 0;
-				m_SimStates[x + (curr_row+1) * simWidth] = 1;
-			}
-		}
-	}
+	
 }
 
 
@@ -107,7 +102,6 @@ void Simulation::Render()
 			}
 		}
 	}*/
-	
 
 
 	//copies the buffer contents to the window renderer - pushes changes maid by render functions to the screen

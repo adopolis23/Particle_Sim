@@ -144,6 +144,51 @@ void sim::Window::fillRect(int x, int y, int width, int height, Uint8 red, Uint8
 	}
 }
 
+
+
+void sim::Window::fillCircle(int32_t center_x, int32_t center_y, int32_t radius, Uint8 red, Uint8 green, Uint8 blue) {
+
+	const int32_t diameter = (radius * 2);
+
+	int32_t x = (radius - 1);
+	int32_t y = 0;
+	int32_t tx = 1;
+	int32_t ty = 1;
+	int32_t error = (tx - diameter);
+
+	//SDL_SetRenderDrawColor(m_Renderer, red, green, blue, 0xFF);
+
+	while (x >= y)
+	{
+		
+		Window::setPixel(center_x + x, center_y - y, red, green, blue);
+		Window::setPixel(center_x + x, center_y + y, red, green, blue);
+		Window::setPixel(center_x - x, center_y - y, red, green, blue);
+		Window::setPixel(center_x - x, center_y + y, red, green, blue);
+		Window::setPixel(center_x + y, center_y - x, red, green, blue);
+		Window::setPixel(center_x + y, center_y + x, red, green, blue);
+		Window::setPixel(center_x - y, center_y - x, red, green, blue);
+		Window::setPixel(center_x - y, center_y + x, red, green, blue);
+
+		if (error <= 0)
+		{
+			++y;
+			error += ty;
+			ty += 2;
+		}
+
+		if (error > 0)
+		{
+			--x;
+			tx += 2;
+			error += (tx - diameter);
+		}
+	}
+
+}
+
+
+
 //Destructor Function
 //free all memory on heap using SDL destroy funcitons
 sim::Window::~Window() {

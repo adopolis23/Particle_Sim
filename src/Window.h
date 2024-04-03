@@ -24,6 +24,8 @@ namespace sim {
 		void setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue);
 		void fillRect(int x, int y, int width, int height, Uint8 red, Uint8 green, Uint8 blue);
 
+		void fillCircle(int32_t center_x, int32_t center_y, int32_t radius, Uint8 red, Uint8 green, Uint8 blue);
+
 	private:
 		SDL_Window* m_Window;
 		SDL_Renderer* m_Renderer;
