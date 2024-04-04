@@ -79,7 +79,7 @@ void Simulation::Update()
 
 	//apply gravity
 	if (gravity)
-		m_ParticleSystem->applyAcceleration(0.0, 0.3);
+		m_ParticleSystem->applyAccelerationAll(0.0, 0.3);
 }
 
 
@@ -92,7 +92,7 @@ void Simulation::Render()
 	m_ParticleSystem->drawDensityHeatMap(m_Window, 10);
  
 	//render particles
-	//m_ParticleSystem->renderParticles(m_Window);
+	m_ParticleSystem->renderParticles(m_Window);
 
 	
 

@@ -54,8 +54,8 @@ void ParticleSystem::updateParticles()
 
 		vec2D grad = CalculateDensityGradientDifferential(positions[i]);
 
-		velocities[i].x += grad.x * -gradientScaleFactor;//accelerations[i].x;
-		velocities[i].y += grad.y * -gradientScaleFactor;//accelerations[i].y;
+		velocities[i].x += (grad.x * -gradientScaleFactor) + accelerations[i].x;
+		velocities[i].y += (grad.y * -gradientScaleFactor) + accelerations[i].y;
 
 
 
@@ -84,7 +84,7 @@ void ParticleSystem::updateParticles()
 
 
 
-void ParticleSystem::applyAcceleration(float ax, float ay)
+void ParticleSystem::applyAccelerationAll(float ax, float ay)
 {
 	for (int i = 0; i < numParticles; i++) {
 		velocities[i].x += ax;
@@ -106,7 +106,24 @@ void ParticleSystem::renderParticles(sim::Window* window) {
 void ParticleSystem::handleMouseClick(int x, int y)
 {
 	vec2D grad = CalculateDensityGradientDifferential(vec2D(x, y));
-	std::cout << grad.x << " " << grad.y << "\n";
+
+	applyRadialForceInArea(x, y, 100, 10.0);
+}
+
+void ParticleSystem::applyRadialForceInArea(int x, int y, int radius, float force)
+{
+	for (int i = 0; i < numParticles; i++) {
+		vec2D dir = vec2D(x, y) - positions[i];
+		if (dir.mag() < radius) {
+			
+			vec2D force_vec = dir / dir.mag();
+			force_vec = force_vec * -force;
+
+			velocities[i] = velocities[i] + force_vec;
+
+		}
+	}
+
 }
 
 
