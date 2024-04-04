@@ -20,7 +20,6 @@ public:
 
 private:
 	void mouseClick(SDL_MouseButtonEvent& b);
-	void drawDensityHeatMap(int block_size);
 
 	sim::Window* m_Window;
 
@@ -28,6 +27,7 @@ private:
 	Uint16 m_Height;
 
 	bool isRunning;
+	bool gravity;
 
 	unsigned int targetFPS;
 

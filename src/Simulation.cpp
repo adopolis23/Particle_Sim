@@ -1,13 +1,15 @@
 #include "Simulation.h"
 
 Simulation::Simulation()
-	:m_Width(700), m_Height(460), m_Window(nullptr), isRunning(false), 
-	targetFPS(100)
+	:m_Width(720), m_Height(480), m_Window(nullptr), isRunning(false), 
+	targetFPS(120)
 {
 
 	m_Window = new sim::Window(m_Width, m_Height);
 
-	m_ParticleSystem = new ParticleSystem(1000, m_Width, m_Height);
+	m_ParticleSystem = new ParticleSystem(200, m_Width, m_Height);
+
+	gravity = false;
 
 }
 
@@ -34,7 +36,7 @@ void Simulation::Start()
 
 		Render();
 
-		
+
 	}
 
 }
@@ -43,6 +45,10 @@ void Simulation::Start()
 void Simulation::mouseClick(SDL_MouseButtonEvent& b) {
 	if (b.button == SDL_BUTTON_LEFT) {
 		std::cout << b.x << " " << b.y << "\n";
+
+		//gravity = !gravity; 
+
+		m_ParticleSystem->handleMouseClick(b.x, b.y);
 	}
 }
 
@@ -70,7 +76,10 @@ void Simulation::HandleInput()
 void Simulation::Update()
 {
 	m_ParticleSystem->updateParticles();
-	m_ParticleSystem->applyAcceleration(0.0, 0.1);
+
+	//apply gravity
+	if (gravity)
+		m_ParticleSystem->applyAcceleration(0.0, 0.3);
 }
 
 
@@ -79,9 +88,13 @@ void Simulation::Render()
 	//clears the screen - sets the main buffer to all zero
 	m_Window->clear();
 	
-	drawDensityHeatMap(1);
+	//render the density heatmap
+	m_ParticleSystem->drawDensityHeatMap(m_Window, 10);
+ 
 	//render particles
-	m_ParticleSystem->renderParticles(m_Window);
+	//m_ParticleSystem->renderParticles(m_Window);
+
+	
 
 
 	//copies the buffer contents to the window renderer - pushes changes maid by render functions to the screen
@@ -89,15 +102,7 @@ void Simulation::Render()
 }
 
 
-void Simulation::drawDensityHeatMap(int block_size) {
 
-	for (int i = 0; i < m_Height; i++) {
-		for (int j = 0; j < m_Width; j++) {
-			m_Window->setPixel(j, i, j, i, 0Xff);
-		}
-	}
-
-}
 
 
 
